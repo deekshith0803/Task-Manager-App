@@ -12,7 +12,7 @@ export const generateToken = (
     throw new Error("JWT_SECRET_KEY is missing");
   }
 
-  const userPayloafd = {
+  const userPayload = {
     userId: id,
     userEmail: email,
     userRole: role,
@@ -22,7 +22,7 @@ export const generateToken = (
     expiresIn: "7d",
   };
 
-  const token = Jwt.sign(userPayloafd, secret, options);
+  const token = Jwt.sign(userPayload, secret, options);
 
   return token;
 };

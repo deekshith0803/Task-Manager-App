@@ -130,7 +130,7 @@ export const updateTask = async (req: Request, res: Response) => {
         status,
       },
       {
-        new: true,
+        returnDocument: "after",
         runValidators: true,
       },
     );

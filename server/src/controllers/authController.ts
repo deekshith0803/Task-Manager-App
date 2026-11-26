@@ -31,13 +31,12 @@ export const signup = async (req: Request, res: Response) => {
       password: hashedPassword,
     });
 
+    const { password: removedPassword, ...userData } = user.toObject();
+
     res.status(200).json({
       success: true,
       message: "user register successfully",
-      user: {
-        fullName,
-        email,
-      },
+      userData,
     });
   } catch (error: unknown) {
     if (error instanceof Error) {
@@ -99,6 +98,7 @@ export const login = async (req: Request, res: Response) => {
       .cookie("token", token, {
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 7,
+        secure: true,
       })
       .json({
         success: true,
