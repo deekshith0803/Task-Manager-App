@@ -98,7 +98,7 @@ export const login = async (req: Request, res: Response) => {
       .cookie("token", token, {
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 7,
-        secure: true,
+        sameSite: "lax",
       })
       .json({
         success: true,
@@ -124,6 +124,40 @@ export const logout = (req: Request, res: Response) => {
     res.status(200).clearCookie("token").json({
       success: true,
       message: "Logout successfully",
+    });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
+    }
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+    });
+  }
+};
+
+export const getMe = async (req: Request, res: Response) => {
+  try {
+    const userId = req.user?.userId;
+
+    if (!userId) {
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    const user = await User.findById(userId).select("-password");
+
+    if (!user) {
+      return res
+        .status(401)
+        .json({ success: false, message: "User not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      userData: user,
     });
   } catch (error: unknown) {
     if (error instanceof Error) {

@@ -9,6 +9,7 @@ export interface userInterface {
 export interface authState {
   isAuthenticated: boolean;
   user: userInterface | null;
+  isLoading: boolean;
 }
 
 export interface RegisterFormValues {

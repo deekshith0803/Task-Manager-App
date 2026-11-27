@@ -6,7 +6,6 @@ import type { RegisterFormValues } from "../types/user";
 import api from "../api/axios";
 import { login } from "../store/user/userSlice";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const registerSchema = Yup.object({
   fullName: Yup.string().required("Full name is required"),

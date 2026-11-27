@@ -144,6 +144,7 @@ export const updateTask = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
+      message: "task update Succesfuly",
       updatedTask,
     });
   } catch (error: unknown) {
@@ -194,6 +195,7 @@ export const deleteTask = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
+      message: "task deleted successfully",
       deletedTask,
     });
   } catch (error: unknown) {
