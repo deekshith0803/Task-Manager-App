@@ -51,6 +51,7 @@ const Dashboard = () => {
       console.log("logout error");
     }
   };
+
   const handleDelete = async (taskId: string) => {
     try {
       const responce = await api.delete(`/delete/${taskId}`);
@@ -63,16 +64,18 @@ const Dashboard = () => {
       console.log("logout error");
     }
   };
+
   const handleEdit = (task: TaskItem) => {
     setTsakItem(task);
     setShowTaskForm(true);
-    try {
-    } catch (error) {}
   };
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-slate-800">My Tasks</h1>
+        <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
+          My Tasks
+        </h1>
         <button
           type="button"
           onClick={() => {
@@ -88,22 +91,22 @@ const Dashboard = () => {
       {/* 3-Column Board */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         {/* Column 1: Pending */}
-        <section className="flex flex-col rounded-xl border border-slate-200 bg-slate-100/70 p-4">
+        <section className="flex flex-col rounded-xl border border-slate-200 bg-slate-100/70 p-4 dark:border-slate-800 dark:bg-slate-900/70">
           <div className="mb-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="h-2.5 w-2.5 rounded-full bg-amber-500" />
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-700">
+              <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-300">
                 Pending
               </h2>
             </div>
-            <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-semibold text-amber-700">
-              0
+            <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-semibold text-amber-700 dark:bg-amber-950/60 dark:text-amber-300">
+              {pendingTasks.length}
             </span>
           </div>
 
           <div className="space-y-3">
             {pendingTasks.length === 0 ? (
-              <p className="py-6 text-center text-xs text-slate-400">
+              <p className="py-6 text-center text-xs text-slate-400 dark:text-slate-500">
                 No pending tasks
               </p>
             ) : (
@@ -121,23 +124,23 @@ const Dashboard = () => {
         </section>
 
         {/* Column 2: Ongoing */}
-        <section className="flex flex-col rounded-xl border border-slate-200 bg-slate-100/70 p-4">
+        <section className="flex flex-col rounded-xl border border-slate-200 bg-slate-100/70 p-4 dark:border-slate-800 dark:bg-slate-900/70">
           <div className="mb-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="h-2.5 w-2.5 rounded-full bg-blue-500" />
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-700">
+              <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-300">
                 Ongoing
               </h2>
             </div>
-            <span className="rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-semibold text-blue-700">
-              0
+            <span className="rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-semibold text-blue-700 dark:bg-blue-950/60 dark:text-blue-300">
+              {ongoingTasks.length}
             </span>
           </div>
 
           <div className="space-y-3">
             {ongoingTasks.length === 0 ? (
-              <p className="py-6 text-center text-xs text-slate-400">
-                No pending tasks
+              <p className="py-6 text-center text-xs text-slate-400 dark:text-slate-500">
+                No ongoing tasks
               </p>
             ) : (
               ongoingTasks.map((task) => (
@@ -154,23 +157,23 @@ const Dashboard = () => {
         </section>
 
         {/* Column 3: Completed */}
-        <section className="flex flex-col rounded-xl border border-slate-200 bg-slate-100/70 p-4">
+        <section className="flex flex-col rounded-xl border border-slate-200 bg-slate-100/70 p-4 dark:border-slate-800 dark:bg-slate-900/70">
           <div className="mb-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-700">
+              <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-300">
                 Completed
               </h2>
             </div>
-            <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-700">
-              0
+            <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300">
+              {completedTasks.length}
             </span>
           </div>
 
           <div className="space-y-3">
             {completedTasks.length === 0 ? (
-              <p className="py-6 text-center text-xs text-slate-400">
-                No pending tasks
+              <p className="py-6 text-center text-xs text-slate-400 dark:text-slate-500">
+                No completed tasks
               </p>
             ) : (
               completedTasks.map((task) => (
@@ -186,6 +189,7 @@ const Dashboard = () => {
           </div>
         </section>
       </div>
+
       {showTaskForm && (
         <TaskForm
           task={taskItem}

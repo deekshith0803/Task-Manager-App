@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { logout } from "../store/user/userSlice";
 import api from "../api/axios";
 import { toast } from "react-toastify";
+import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
@@ -25,14 +26,14 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-md">
+    <nav className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/80">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link to="/" className="flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-600 font-bold text-white shadow-sm">
             TM
           </div>
 
-          <span className="hidden text-lg font-semibold tracking-tight text-slate-800 sm:block">
+          <span className="hidden text-lg font-semibold tracking-tight text-slate-800 sm:block dark:text-slate-100">
             TaskManager
           </span>
         </Link>
@@ -41,7 +42,7 @@ const Navbar = () => {
           <li>
             <Link
               to="/tasks"
-              className="text-sm font-medium capitalize text-slate-600 transition-colors hover:text-indigo-600"
+              className="text-sm font-medium capitalize text-slate-600 transition-colors hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400"
             >
               My Tasks
             </Link>
@@ -50,14 +51,15 @@ const Navbar = () => {
           <li>
             <Link
               to="/profile"
-              className="text-sm font-medium capitalize text-slate-600 transition-colors hover:text-indigo-600"
+              className="text-sm font-medium capitalize text-slate-600 transition-colors hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400"
             >
               Profile
             </Link>
           </li>
         </ul>
 
-        <div>
+        <div className="flex gap-3">
+          <ThemeToggle />
           {isAuthenticated ? (
             <button
               onClick={handleLogout}

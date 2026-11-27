@@ -26,7 +26,7 @@ function App() {
     checkSession();
   }, [dispatch]);
   return (
-    <>
+    <div className="min-h-screen bg-slate-50 text-slate-900 transition-colors dark:bg-slate-950 dark:text-slate-100">
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
@@ -42,7 +42,7 @@ function App() {
         </Route>
       </Routes>
       <ToastContainer position="top-center" autoClose={3000} />
-    </>
+    </div>
   );
 }
 
